@@ -3,37 +3,48 @@
     Add Category || Dashboard
 @endsection
 @section('content')
-    {{-- <div class="container"> --}}
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span> Add Category</h4>
+    {{-- <div class="container-xxl flex-grow-1 container-p-y"> --}}
+    <div class="container">
+        <h4 class="fw-bold py-3 "><span class="text-muted fw-light">Page/</span> Add Category</h4>
+
         <div class="col-xxl">
             <div class="card mb-4">
-                <div class="card-header d-flex  justify-align-items-centercontent-between">
-                    <h4class="mb-0">Add New Category</h4>
-                    <small class="text-muted float-end">Input Information</ small>
-                </div>
+                {{-- <div class="card-header d-flex align-items-center justify-content-between"> --}}
+                <h4 class="mb-0 mx-3 mt-3">Add New Category</h4>
+                {{-- <small class="text-muted float-end">Default label</small> --}}
+                {{-- </div> --}}
                 <div class="card-body">
-                    <form action="" method="POST">
 
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    
+                    <form action="{{ route('storecategory') }} " method="POST">
+                        @csrf
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name"> Category Name</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-name">Category Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="category_name" name="category_ame"
-                                    placeholder="Electronic Product" />
+                                <input type="text" class="form-control" id="category_name" name="category_name"
+                                    placeholder="Phone" />
                             </div>
+                        </div>
 
-
-
-                            <div class="row mb-3">
-
-                                <div class="row justify- content-end">
-                                    <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-primary">Add Category</button>
-                                    </div>
-                                </div>
+                        <div class="row justify-content-end">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Add Category</button>
                             </div>
+                        </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
