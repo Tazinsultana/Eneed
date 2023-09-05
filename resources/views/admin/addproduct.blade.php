@@ -1,7 +1,7 @@
 @extends('admin.layouts.Main')
 @section('page_title')
-    E-Need || Dashboard
+    Add Products || Dashboard
 @endsection
 @section('content')
-    Hi Ami Dashboard
+    add Product
 @endsection

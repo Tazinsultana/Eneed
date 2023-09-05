@@ -1,7 +1,7 @@
 @extends('admin.layouts.Main')
 @section('page_title')
-    E-Need || Dashboard
+    Add Sub-Categories || Dashboard
 @endsection
 @section('content')
-    Hi Ami Dashboard
+    Add Sub Category
 @endsection

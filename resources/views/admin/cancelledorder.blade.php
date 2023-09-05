@@ -1,7 +1,7 @@
 @extends('admin.layouts.Main')
 @section('page_title')
-    E-Need || Dashboard
+    Cancelled Order || Dashboard
 @endsection
 @section('content')
-    Hi Ami Dashboard
+    cancelled ordern
 @endsection
