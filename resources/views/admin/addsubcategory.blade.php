@@ -13,12 +13,13 @@
                 {{-- <small class="text-muted float-end">Default label</small> --}}
                 {{-- </div> --}}
                 <div class="card-body">
-                    <form action=" " method="POST">
+                    <form action="{{ route('storesubcategory') }} " method="POST">
+                        @csrf
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name"> Sub Category Name</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="subcategory_name" name="subcategory_name"
-                                    placeholder="Phone" />
+                                    placeholder="Enter Sub Category" />
                             </div>
                         </div>
 
@@ -27,11 +28,12 @@
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name"> Select Category</label>
                             <div class="col-sm-10">
-                                <select id="category"  name="category" class="form-control">
+                                <select id="category_id" name="category_id" class="form-control">
                                     <option> Select Category </option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                    @endforeach
+
                                 </select>
 
                             </div>

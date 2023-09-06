@@ -40,27 +40,31 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/admin/dashboard', 'Index')->name('admindashboard');
-  
 
-    Route::controller(CategoryController::class)->group(function () {
-        Route::get('/admin/add-category', 'AddCategory')->name('addcategory');
-        Route::get('/admin/all-category', 'AllCategory')->name('allcategory');
-        Route::post('admin/store-category','StoreCategory')->name('storecategory');
-    });
 
-    Route::controller(SubcategoryController::class)->group(function () {
-        Route::get('/admin/add-subcategory', 'AddSubCategory')->name('addsubcategory');
-        Route::get('/admin/all-subcategory', 'AllSubCategory')->name('allsubcategory');
+        Route::controller(CategoryController::class)->group(function () {
+            Route::get('/admin/add-category', 'AddCategory')->name('addcategory');
+            Route::get('/admin/all-category', 'Index')->name('allcategory');
+            Route::post('admin/store-category', 'StoreCategory')->name('storecategory');
+            Route::get('/admin/edit-category/{id}', 'EditCategory')->name('editcategory');
+            Route::post('admin/update-category', 'UpdateCategory')->name('updatecategory');
+            Route::get('/admin/delete-category/{id}', 'DeleteCategory')->name('deletecategory');
+        });
+
+        Route::controller(SubcategoryController::class)->group(function () {
+            Route::get('/admin/add-subcategory', 'AddSubCategory')->name('addsubcategory');
+            Route::get('/admin/all-subcategory', 'Index')->name('allsubcategory');
+            Route::post('/admin/store-subcategory','StoreSubCategory')->name('storesubcategory');
+        });
+        Route::controller(ProductController::class)->group(function () {
+            Route::get('/admin/add-product', 'AddProduct')->name('addproduct');
+            Route::get('/admin/all-product', 'Index')->name('allproduct');
+        });
+        Route::controller(OrderController::class)->group(function () {
+            Route::get('/admin/pendingorder', 'PendingOrder')->name('pendingorder');
+            Route::get('/admin/confirmedorder', 'ConfirmedOrder')->name('confirmedorder');
+            Route::get('/admin/cancelledorder', 'CancelledOrder')->name('cancelledorder');
+        });
     });
-    Route::controller(ProductController::class)->group(function () {
-        Route::get('/admin/add-product', 'AddProduct')->name('addproduct');
-        Route::get('/admin/all-product', 'AllProduct')->name('allproduct');
-    });
-    Route::controller(OrderController::class)->group(function () {
-        Route::get('/admin/pendingorder', 'PendingOrder')->name('pendingorder');
-        Route::get('/admin/confirmedorder', 'ConfirmedOrder')->name('confirmedorder');
-        Route::get('/admin/cancelledorder', 'CancelledOrder')->name('cancelledorder');
-    });
-});
 });
 require __DIR__ . '/auth.php';
