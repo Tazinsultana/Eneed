@@ -16,12 +16,12 @@ return new class extends Migration {
             $table->string('product_short_des');
             $table->string('product_long_des');
             $table->integer('price');
-            // $table->integer('product_quantity');
             $table->string('product_category_name');
             $table->string('product_subcategory_name');
             $table->integer('product_category_id');
             $table->integer('product_subcategory_id');
             $table->string('product_img');
+            $table->integer('product_quantity');
             $table->string('slug');
             $table->timestamps();
         });

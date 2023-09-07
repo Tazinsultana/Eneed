@@ -55,10 +55,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/admin/add-subcategory', 'AddSubCategory')->name('addsubcategory');
             Route::get('/admin/all-subcategory', 'Index')->name('allsubcategory');
             Route::post('/admin/store-subcategory','StoreSubCategory')->name('storesubcategory');
+            Route::get('/admin/edit-subcatgory/{id}','EditSubCategory')->name('editsubcategory');
+            Route::post('/admin/update-subcategory','UpdateSubCategory')->name('updatesubcategory');
+            Route::get('/admin/delete-subcategory/{id}', 'DeleteSubCategory')->name('deletesubcategory');
         });
         Route::controller(ProductController::class)->group(function () {
             Route::get('/admin/add-product', 'AddProduct')->name('addproduct');
             Route::get('/admin/all-product', 'Index')->name('allproduct');
+            Route::post('/admin/store-product','StoreProduct')->name('storeproduct');
+            Route::get('/admin/edit-product/{id}','EditProduct')->name('editproduct');
+            Route::post('/admin/update-product','UpdateProduct')->name('updateproduct');
         });
         Route::controller(OrderController::class)->group(function () {
             Route::get('/admin/pendingorder', 'PendingOrder')->name('pendingorder');

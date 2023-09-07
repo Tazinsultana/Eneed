@@ -1,10 +1,10 @@
 @extends('admin.layouts.Main')
 @section('page_title')
-    Add Products || Dashboard
+    Edit Products || Dashboard
 @endsection
 @section('content')
     <div class="container">
-        <h4 class="fw-bold py-3 "><span class="text-muted fw-light">Page/</span> Add Product</h4>
+        <h4 class="fw-bold py-3 "><span class="text-muted fw-light">Page/</span> Edit Product</h4>
 
         <div class="col-xxl">
             <div class="card ">
@@ -14,7 +14,7 @@
                 {{-- </div> --}}
                 <div class="card-body">
 
-                     
+
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -24,8 +24,8 @@
                             </ul>
                         </div>
                     @endif
-                    
-                    <form action="{{ route('storeproduct') }} " method="POST" enctype="multipart/form-data">
+
+                    <form action="{{ route('updateproduct') }} " method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name"> Product Name</label>
@@ -69,36 +69,9 @@
 
 
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name"> Select Category</label>
-                            <div class="col-sm-10">
-                                <select id="product_category_id" name="product_category_id" class="form-control">
-                                    <option> Select Category </option>
-                                    @foreach ( $categories as $category )
-                                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                                    @endforeach
-                                
-                                   
-                                </select>
 
-                            </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name"> Select Sub Category</label>
-                            <div class="col-sm-10">
-                                <select id="product_subcategory_id" name="product_subcategory_id" class="form-control">
-                                    <option> Select Sub Category </option>
 
-                                    @foreach ($subcategories as $subcategory)
-                                    <option value="{{ $subcategory->id}}">{{ $subcategory->subcategory_name }}</option>
-                                    @endforeach
-                                 
-                                   
-                                </select>
-
-                            </div>
-                        </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">Upload File</label>
@@ -113,7 +86,7 @@
 
                         <div class="row justify-content-end">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Add Product</button>
+                                <button type="submit" class="btn btn-primary">Update Product Product</button>
                             </div>
                         </div>
                     </form>
