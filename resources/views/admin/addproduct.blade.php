@@ -63,7 +63,7 @@
                             <div class="col-sm-10">
                                 {{-- <input type="text" class="form-control" id="product_quantity" name="product_quantity"
                                 placeholder="12" /> --}}
-                                <textarea class="form-control" name="long_pd" id="long_pd" cols="30" rows="10"></textarea>
+                                <textarea class="form-control" name="long_pd" id="long_pd" cols="130" rows="100"></textarea>
                             </div>
                         </div>
 

@@ -33,13 +33,19 @@
                             <tr>
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->product_name }}</td>
-                                <td> {{ $product->product_img }}</td>
-                                <td>{{ $product->price }}</td>
+
+                                <td>
+                                    <img style="height:100px" src="{{ asset($product->product_img) }}" alt="{{ $product->product_name }}">
+                                    <br>
+                                    <a href="{{ route('editproductimage', $product->id) }} " class="btn btn-primary">Update Image</a>
+
+                                </td>
+                                <td> {{ $product->price }}</td>
                                 <td>{{ $product->product_quantity }}</td>
                                 <td>
 
                                     <a href="{{ route('editproduct', $product->id) }} " class="btn btn-primary"> Edit</a>
-                                    <a href="" class="btn btn-danger">delete</a>
+                                    <a href="{{ route('deleteproduct',$product->id) }}" class="btn btn-danger">Delete</a>
 
                                 </td>
 

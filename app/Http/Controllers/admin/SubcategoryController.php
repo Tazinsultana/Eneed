@@ -26,7 +26,7 @@ class SubcategoryController extends Controller
 
         $request->validate([
             'subcategory_name' => 'required|unique:sub_categories| max:255',
-            'category_id' => 'required'
+            'category_id' => 'required',
 
 
         ]);

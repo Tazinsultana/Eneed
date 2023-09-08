@@ -9,7 +9,7 @@
         <div class="col-xxl">
             <div class="card ">
                 {{-- <div class="card-header d-flex align-items-center justify-content-between"> --}}
-                <h4 class="mb-0 mx-3 mt-3">Add New Product</h4>
+                <h4 class="mb-0 mx-3 mt-3">Edit Product</h4>
                 {{-- <small class="text-muted float-end">Default label</small> --}}
                 {{-- </div> --}}
                 <div class="card-body">
@@ -25,27 +25,28 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('updateproduct') }} " method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('updateproduct') }} " method="POST" >
                         @csrf
+                        <input type="hidden" value="{{  $product_info->id}}" name="id">
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name"> Product Name</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="product_name" name="product_name"
-                                    placeholder="Phone" />
+                                    value="{{ $product_info->product_name }}" />
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name"> Product Price</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" id="product_price" name="product_price"
-                                    placeholder="100" />
+                                    value="{{ $product_info->price }}" />
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name"> Product Quantity</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="product_quantity" name="product_quantity"
-                                    placeholder="12" />
+                                    value="{{ $product_info->product_quantity }}" />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -54,7 +55,7 @@
                             <div class="col-sm-10">
                                 {{-- <input type="text" class="form-control" id="product_quantity" name="product_quantity"
                                 placeholder="12" /> --}}
-                                <textarea class="form-control" name="short_pd" id="short_pd" cols="20" rows="5"></textarea>
+                                <textarea class="form-control" name="short_pd" id="short_pd" cols="20" rows="5"> {{ $product_info->product_short_des }}</textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -63,7 +64,7 @@
                             <div class="col-sm-10">
                                 {{-- <input type="text" class="form-control" id="product_quantity" name="product_quantity"
                                 placeholder="12" /> --}}
-                                <textarea class="form-control" name="long_pd" id="long_pd" cols="30" rows="10"></textarea>
+                                <textarea class="form-control" name="long_pd" id="long_pd" cols="30" rows="10">{{ $product_info->product_long_des }}</textarea>
                             </div>
                         </div>
 
@@ -73,26 +74,26 @@
 
 
 
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">Upload File</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="file" id="product_img" name="product_img" />
                                 {{-- <input class="form-control" type="file" id="formFileMultiple" multiple /> --}}
-                            </div>
-                        </div>
-
-
-
-
-                        <div class="row justify-content-end">
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Update Product Product</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
+                {{-- </div> --}}
 
+
+
+
+                <div class="row justify-content-end">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Update Product Product</button>
+                    </div>
+                </div>
+                </form>
             </div>
+
         </div>
+    </div>
     </div>
 @endsection

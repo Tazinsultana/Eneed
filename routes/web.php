@@ -65,6 +65,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('/admin/store-product','StoreProduct')->name('storeproduct');
             Route::get('/admin/edit-product/{id}','EditProduct')->name('editproduct');
             Route::post('/admin/update-product','UpdateProduct')->name('updateproduct');
+            Route::get('/admin/edit-image/{id}','EditProductImage')->name('editproductimage');
+            Route::post('admin/update-image','UpdateproductImage')->name('updateproductimg');
+            Route::get('/admi/delete-product/{id}','DeleteProduct')->name('deleteproduct');
         });
         Route::controller(OrderController::class)->group(function () {
             Route::get('/admin/pendingorder', 'PendingOrder')->name('pendingorder');
