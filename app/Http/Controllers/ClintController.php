@@ -2,10 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ClintController extends Controller
+
 {
+//     public function Home(){
+
+    
+//     $Categories=Category::all();
+//     {
+//         return view('user.layouts.header',compact('Categories'));
+//     }
+// }
+
+    
     public function CategoryPage(){
 
         return view('user.categorypage');

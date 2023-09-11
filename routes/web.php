@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::controller(UserController::class)->group(function () {
-    Route::get('/room', 'Home')->name('home');
+    Route::get('/homepage', 'Home')->name('home');
     Route::get('/', 'UserTemplate')->name('usertemplate');
 });
 
@@ -97,6 +97,9 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
             Route::get('/admin/cancelledorder', 'CancelledOrder')->name('cancelledorder');
         });
     });
+
+  
+
 });
 
 

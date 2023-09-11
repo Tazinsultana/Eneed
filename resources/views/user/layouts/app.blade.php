@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
    <head>
       <!-- basic -->
@@ -9,10 +9,10 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Eflyer</title>
-      <meta name="keywords" content="">
+      <title> @yield('page_title') </title>
+      {{-- <meta name="keywords" content="">
       <meta name="description" content="">
-      <meta name="author" content="">
+      <meta name="author" content=""> --}}
       <!-- bootstrap css -->
       <link rel="stylesheet" type="text/css" href="{{asset('home/css/bootstrap.min.css')}}">
       <!-- style css -->
@@ -40,8 +40,9 @@
 
     @include('user.layouts.header')
 
-  <div class="content-wrapper">
+  <div class="container py-6 pt-5 pb-6">
   
+
   @yield('content')
 
   </div>
@@ -49,3 +50,5 @@
   @include('user.layouts.footer')
   </body>
   </html>
+
+  
