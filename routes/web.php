@@ -45,8 +45,8 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::controller(ClintController::class)->group(function () {
-    Route::get('/category', 'CategoryPage')->name('category');
-    Route::get('/single-product','SingleProduct')->name('product');
+    Route::get('/category/{id}/{slug}', 'CategoryPage')->name('category');
+    Route::get('/product-details/{id}/{slug}','ProductDetails')->name('productdetails');
     Route::get('/add-to-cart','AddtoCart')->name('addtocart');
     Route::get('/check-out','CheckOutt')->name('cheackout');
     Route::get('/userprofile','UserProfile')->name('userprofile');

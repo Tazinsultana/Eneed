@@ -9,7 +9,7 @@
        <div class="footer_menu">
           <ul>
              <li><a href="{{ route('bestseller') }}">Best Sellers</a></li>
-             <li><a href="{{ route('category') }}">Gift Ideas</a></li>
+             <li><a href="#">Gift Ideas</a></li>
              <li><a href="{{ route('newrelease') }}">New Releases</a></li>
              <li><a href="{{ route('todaysdeal') }}">Today's Deals</a></li>
              <li><a href="{{ route('customerservice') }}">Customer Service</a></li>

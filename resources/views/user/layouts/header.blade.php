@@ -8,7 +8,7 @@
                 <div class="custom_menu">
                    <ul>
                       <li><a href="{{ route('bestseller') }}">Best Sellers</a></li>
-                      <li><a href="{{ route('category') }}">Gift Ideas</a></li>
+                      <li><a href="#">Gift Ideas</a></li>
                       <li><a href="{{ route('newrelease') }}">New Releases</a></li>
                       <li><a href="{{ route('todaysdeal') }}">Today's Deals</a></li>
                       <li><a href="{{ route('customerservice') }}">Customer Service</a></li>
@@ -43,19 +43,19 @@
 
                     @foreach ( $Categories as $category)
                     
-                     <a href="#">{{  $category->category_name }} </a>
+                     <a href="{{ route('category',[$category->id,$category->slug]) }}">{{  $category->category_name }} </a>
                     
                     @endforeach 
             
              
              </div>
-             <span class="toggle_icon" onclick="openNav()"><img src="{{ asset('home/images/toggle-icon.png') }}"></span>
+             <span class="toggle_icon" onclick="openNav()"><img src="{{ asset('home/images/toggle-icon.png') }}" style="filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg) brightness(95%) contrast(80%);"></span>
              <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category 
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @foreach ( $Categories as $category)
-                   <a class="dropdown-item" href="#">{{  $category->category_name }} </a>
+                   <a class="dropdown-item" href="{{ route('category',[$category->id,$category->slug]) }}">{{  $category->category_name }} </a>
                    @endforeach 
                
                 </div>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="login_menu">
                    <ul>
-                      <li><a href="#">
+                      <li><a href="#" style="">
                          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                          <span class="padding_10">Cart</span></a>
                       </li>

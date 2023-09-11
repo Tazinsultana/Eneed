@@ -30,7 +30,7 @@ class ProductController extends Controller
 
 
         $request->validate([
-            'product_name' => 'required|unique:products| max:255',
+            'product_name' => 'required|max:255|unique:products',
             'product_price' => 'required',
             'product_quantity' => 'required',
             'short_pd' => 'required',
@@ -101,7 +101,7 @@ class ProductController extends Controller
         $product_id = $request->id;
 
         $request->validate([
-            'product_name' => 'required|unique:products| max:255',
+            'product_name' => 'required|max:255|unique:products,product_name,'.$request->id,
             'product_price' => 'required',
             'product_quantity' => 'required',
             'short_pd' => 'required',
