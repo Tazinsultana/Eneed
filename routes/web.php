@@ -4,8 +4,10 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SubcategoryController;
+use App\Http\Controllers\ClintController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,10 +38,30 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::middleware(['auth', 'verified','admin'])->group(function () {
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/room', 'Home')->name('home');
+    Route::get('/', 'UserTemplate')->name('usertemplate');
+});
+
+Route::controller(ClintController::class)->group(function () {
+    Route::get('/category', 'CategoryPage')->name('category');
+    Route::get('/single-product','SingleProduct')->name('product');
+    Route::get('/add-to-cart','AddtoCart')->name('addtocart');
+    Route::get('/check-out','CheckOutt')->name('cheackout');
+    Route::get('/userprofile','UserProfile')->name('userprofile');
+    Route::get('/best-seller','BestSeller')->name('bestseller');
+    Route::get('/new-release','NewRelease')->name('newrelease');
+    Route::get('/todays-deal','TodeaysDeal')->name('todaysdeal');
+    Route::get('/customer-service','CustomerService')->name('customerservice');
+});
+
+
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/admin/dashboard', 'Index')->name('admindashboard');
+
 
 
         Route::controller(CategoryController::class)->group(function () {
@@ -54,20 +76,20 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
         Route::controller(SubcategoryController::class)->group(function () {
             Route::get('/admin/add-subcategory', 'AddSubCategory')->name('addsubcategory');
             Route::get('/admin/all-subcategory', 'Index')->name('allsubcategory');
-            Route::post('/admin/store-subcategory','StoreSubCategory')->name('storesubcategory');
-            Route::get('/admin/edit-subcatgory/{id}','EditSubCategory')->name('editsubcategory');
-            Route::post('/admin/update-subcategory','UpdateSubCategory')->name('updatesubcategory');
+            Route::post('/admin/store-subcategory', 'StoreSubCategory')->name('storesubcategory');
+            Route::get('/admin/edit-subcatgory/{id}', 'EditSubCategory')->name('editsubcategory');
+            Route::post('/admin/update-subcategory', 'UpdateSubCategory')->name('updatesubcategory');
             Route::get('/admin/delete-subcategory/{id}', 'DeleteSubCategory')->name('deletesubcategory');
         });
         Route::controller(ProductController::class)->group(function () {
             Route::get('/admin/add-product', 'AddProduct')->name('addproduct');
             Route::get('/admin/all-product', 'Index')->name('allproduct');
-            Route::post('/admin/store-product','StoreProduct')->name('storeproduct');
-            Route::get('/admin/edit-product/{id}','EditProduct')->name('editproduct');
-            Route::post('/admin/update-product','UpdateProduct')->name('updateproduct');
-            Route::get('/admin/edit-image/{id}','EditProductImage')->name('editproductimage');
-            Route::post('admin/update-image','UpdateproductImage')->name('updateproductimg');
-            Route::get('/admi/delete-product/{id}','DeleteProduct')->name('deleteproduct');
+            Route::post('/admin/store-product', 'StoreProduct')->name('storeproduct');
+            Route::get('/admin/edit-product/{id}', 'EditProduct')->name('editproduct');
+            Route::post('/admin/update-product', 'UpdateProduct')->name('updateproduct');
+            Route::get('/admin/edit-image/{id}', 'EditProductImage')->name('editproductimage');
+            Route::post('admin/update-image', 'UpdateproductImage')->name('updateproductimg');
+            Route::get('/admi/delete-product/{id}', 'DeleteProduct')->name('deleteproduct');
         });
         Route::controller(OrderController::class)->group(function () {
             Route::get('/admin/pendingorder', 'PendingOrder')->name('pendingorder');
@@ -76,4 +98,7 @@ Route::middleware(['auth', 'verified','admin'])->group(function () {
         });
     });
 });
+
+
+// Route::get('/home',[@UserController::class,'Home');
 require __DIR__ . '/auth.php';
