@@ -49,7 +49,9 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
 
         Route::get('/add-to-cart','AddtoCart')->name('addtocart');
         Route::post('/add-product-to-cart','addProductToCart')->name('addproducttocart');
-        Route::get('/check-out', 'CheckOutt')->name('cheackout');
+        Route::get('/check-out', 'CheckOutt')->name('checkout');
+        Route::post('/shipping-address','GetShippingInfo')->name('shippinginfo');
+        Route::get('/shipping-added','ShippingAdded')->name('shippingadded');
         Route::get('/userprofile', 'UserProfile')->name('userprofile');
         Route::get('/userprofile-pendingorder', 'PendingOrder')->name('pendingorders');
         Route::get('/userprofile-history', 'History')->name('history');
@@ -57,6 +59,7 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
         Route::get('/new-release', 'NewRelease')->name('newrelease');
         Route::get('/todays-deal', 'TodeaysDeal')->name('todaysdeal');
         Route::get('/customer-service', 'CustomerService')->name('customerservice');
+        Route::get('/remove-cart-item/{id}','RemoveProduct')->name('remove');
     });
 
 });

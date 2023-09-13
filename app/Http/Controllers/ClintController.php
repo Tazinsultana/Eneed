@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CartModel;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ShippingInfo;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,17 +32,17 @@ class ClintController extends Controller
 
     public function AddtoCart()
     {
-        $userid=Auth::id();
+        $userid = Auth::id();
 
-        $cart_item=CartModel::where('user_id',$userid)->get();
+        $cart_item = CartModel::where('user_id', $userid)->get();
 
-        return view('user.addtocart',compact('cart_item'));
+        return view('user.addtocart', compact('cart_item'));
     }
     public function addProductToCart(Request $request)
     {
         $product_price = $request->price;
         $quantity = $request->product_quantity;
-        $price=$product_price * $quantity;
+        $price = $product_price * $quantity;
         // $price = $product_price * $quantity;
         // dd($price);
 
@@ -61,12 +62,51 @@ class ClintController extends Controller
     }
 
 
+    public function RemoveProduct($id)
+    {
+        CartModel::findOrFail($id)->delete();
+        return redirect()->route('addtocart')->with('message', 'Item Successfully Remove to Cart');
+
+    }
+
     public function CheckOutt()
     {
 
         return view('user.checkout');
     }
 
+    public function GetShippingInfo(Request $request)
+    {
+
+       
+        // $user_id = Auth::id();
+        $request->validate([
+
+           
+            'address' => 'required',
+            'postalcode' => 'required',
+            'phone' => 'required'
+        
+
+        ]);
+      
+
+        ShippingInfo::create([
+            'user_id' => Auth::id(),
+            'address' => $request->address,
+            'postal_code' => $request->postalcode,
+            'phone' => $request->phone,
+        ]);
+       
+    
+        return redirect()->route('shippingadded')->with('message', 'Address Added Successfully!!');
+
+    }
+
+    public function ShippingAdded(){
+
+        return view('user.addship');
+    }
 
     public function UserProfile()
     {

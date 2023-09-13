@@ -39,10 +39,12 @@
                                     @endphp
                                     <tr>
                                         <td>{{ $product_name }}</td>
-                                        <td><img src="{{ asset($img) }}" alt="" style="height:50px"></td>
-                                        <td>{{ $carts->quantity }}</td>
+                                        <td ><img src="{{ asset($img) }}" alt="" style="height:50px"></td>
+                                        <td>{{ $carts->quantity }} </td>
+                                        {{-- <input type="number" min="1"  name="product_quantity" style="height: 30px">  --}}
+                                    
                                         <td>{{ $carts->price }}</td>
-                                        <td> <a href=""Class="btn btn-warning">Remove</a></td>
+                                        <td> <a href="{{ route('remove',$carts->id) }}"Class="btn btn-warning">Remove</a></td>
 
                                     </tr>
                                     @php
@@ -50,12 +52,18 @@
                                     @endphp
                              
                                 @endforeach
+
                                 <tr>
+                                    @if($total>0)
                                     <td></td>
                                     <td></td>
 
-                                    <td class="text-left" >Total</td>
+                                    <td class="text-left" ><strong>Total</strong></td>
                                     <td>{{ $total }}</td>
+                                   
+                                    <td> <a href="{{ route('checkout') }}"Class="btn btn-danger">Check Out</a></td>
+                                   
+                                    @endif
                                 </tr>
 
 
