@@ -9,10 +9,10 @@ class UserController extends Controller
 {
 
     
-    public function UserTemplate(){
+    // public function UserTemplate(){
 
-        return view('user.layouts.app');
-    } 
+    //     return view('user.layouts.app');
+    // } 
     public function Home(){
         $allproducts=Product::all();
 

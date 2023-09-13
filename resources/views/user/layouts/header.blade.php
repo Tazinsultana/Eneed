@@ -39,11 +39,24 @@
                 <a href="{{ route('home') }}">Home</a>
                @php
                 $Categories=App\Models\Category::all();
+               //  $Subcategories=App\Models\SubCategory::all();
                 @endphp
 
                     @foreach ( $Categories as $category)
                     
                      <a href="{{ route('category',[$category->id,$category->slug]) }}">{{  $category->category_name }} </a>
+                     {{-- <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub Category 
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                           @foreach ( $Subcategories as $subcategory)
+                   <a class="dropdown-item" href="{{ route('category',[$subcategory->id,$subcategory->slug]) }}">{{  $subcategory->subcategory_name }} </a>
+                   @endforeach 
+                           {{-- <a class="dropdown-item" href="#">Action</a>
+                           <a class="dropdown-item" href="#">Another action</a>
+                           <a class="dropdown-item" href="#">Something else here</a> --}}
+                        {{-- </div>
+                     </div> --}} 
                     
                     @endforeach 
             

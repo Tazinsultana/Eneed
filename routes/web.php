@@ -10,16 +10,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,19 +31,34 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/homepage', 'Home')->name('home');
-    Route::get('/', 'UserTemplate')->name('usertemplate');
+    // Route::get('/', 'UserTemplate')->name('usertemplate');
 });
 
 Route::controller(ClintController::class)->group(function () {
     Route::get('/category/{id}/{slug}', 'CategoryPage')->name('category');
-    Route::get('/product-details/{id}/{slug}','ProductDetails')->name('productdetails');
-    Route::get('/add-to-cart','AddtoCart')->name('addtocart');
-    Route::get('/check-out','CheckOutt')->name('cheackout');
-    Route::get('/userprofile','UserProfile')->name('userprofile');
-    Route::get('/best-seller','BestSeller')->name('bestseller');
-    Route::get('/new-release','NewRelease')->name('newrelease');
-    Route::get('/todays-deal','TodeaysDeal')->name('todaysdeal');
-    Route::get('/customer-service','CustomerService')->name('customerservice');
+    Route::get('/product-details/{id}/{slug}', 'ProductDetails')->name('productdetails');
+    Route::get('/new-release', 'NewRelease')->name('newrelease');
+ 
+});
+
+
+Route::middleware(['auth', 'verified', 'user'])->group(function () {
+
+
+    Route::controller(ClintController::class)->group(function () {
+
+        Route::get('/add-to-cart','AddtoCart')->name('addtocart');
+        Route::post('/add-product-to-cart','addProductToCart')->name('addproducttocart');
+        Route::get('/check-out', 'CheckOutt')->name('cheackout');
+        Route::get('/userprofile', 'UserProfile')->name('userprofile');
+        Route::get('/userprofile-pendingorder', 'PendingOrder')->name('pendingorders');
+        Route::get('/userprofile-history', 'History')->name('history');
+        Route::get('/best-seller', 'BestSeller')->name('bestseller');
+        Route::get('/new-release', 'NewRelease')->name('newrelease');
+        Route::get('/todays-deal', 'TodeaysDeal')->name('todaysdeal');
+        Route::get('/customer-service', 'CustomerService')->name('customerservice');
+    });
+
 });
 
 
@@ -90,6 +95,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
             Route::get('/admin/edit-image/{id}', 'EditProductImage')->name('editproductimage');
             Route::post('admin/update-image', 'UpdateproductImage')->name('updateproductimg');
             Route::get('/admi/delete-product/{id}', 'DeleteProduct')->name('deleteproduct');
+            Route::get('admin/show-product/{id}/{slug}','showProduct')->name('showproduct');
         });
         Route::controller(OrderController::class)->group(function () {
             Route::get('/admin/pendingorder', 'PendingOrder')->name('pendingorder');
@@ -98,7 +104,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         });
     });
 
-  
+
 
 });
 

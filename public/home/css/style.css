@@ -661,10 +661,10 @@ a:hover {
 #main_slider .carousel-control-prev {
     width: 55px;
     height: 55px;
-    background-color: #30302e;
+    background-color: #151514;
     opacity: 1;
     font-size: 30px;
-    color: #ffffff;
+    color: #ba0505;
 }
 
 #main_slider .carousel-control-next:focus,
@@ -672,7 +672,7 @@ a:hover {
 #main_slider .carousel-control-prev:focus,
 #main_slider .carousel-control-prev:hover {
     color: #fff;
-    background-color: #f26522;
+    background-color: #ede9e7;
 }
 
 
@@ -702,7 +702,7 @@ a:hover {
 #electronic_main_slider .carousel-control-prev {
     width: 55px;
     height: 55px;
-    background-color: #30302e;
+    background-color: #1b1b18;
     opacity: 1;
     font-size: 30px;
     color: #ffffff;

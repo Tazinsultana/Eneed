@@ -1,16 +1,16 @@
 @extends('user.layouts.app')
 @section('page_title', 'Home')
 @push('inlinecss')
-   <style>
-      .banner_bg_main {
-    width: 100%;
-    float: left;
-    background-image: url("{{ asset('home/images/banner-bg.png') }}");
-     height: auto;
-    background-size: 100%;
-    background-repeat: no-repeat;
-} 
-   </style>
+    <style>
+        .banner_bg_main {
+            width: 100%;
+            float: left;
+            background-image: url("{{ asset('home/images/banner-bg.png') }}");
+            height: auto;
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+    </style>
 @endpush
 @section('content')
     <!-- header top section start -->
@@ -75,8 +75,21 @@
                                                     style="color: #262626;">{{ $products->price }}</span></p>
                                             <div class="tshirt_img"><img src="{{ asset($products->product_img) }}"></div>
                                             <div class="btn_main">
-                                                <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                                <div class="seemore_bt"><a href="{{ route('productdetails',[$products->id,$products->slug]) }}">See More</a></div>
+                                                <div class="buy_bt">
+
+                                                    <form action="{{ route('addproducttocart') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" value="{{ $products->id }}" name="product_id">
+                                                        <input type="hidden" value="{{ $products->price }}" name="price">
+                                                        <input type="hidden" value="1" name="product_quantity">
+                                                        <input class="btn btn-warning" type="submit" value="Buy Now">
+                                                    </form>
+
+
+                                                </div>
+                                                <div class="seemore_bt"><a
+                                                        href="{{ route('productdetails', [$products->id, $products->slug]) }}">See
+                                                        More</a></div>
                                             </div>
                                         </div>
                                     </div>

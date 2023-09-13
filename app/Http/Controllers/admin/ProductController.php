@@ -43,7 +43,7 @@ class ProductController extends Controller
 
         ]);
         $image = $request->file('product_img');
-        $img_name = hexdec(uniqid()).'.'. $image->getClientOriginalExtension();
+        $img_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
         $request->product_img->move(public_path('upload'), $img_name);
         $img_url = 'upload/' . $img_name;
 
@@ -84,16 +84,25 @@ class ProductController extends Controller
         return redirect()->route('allproduct')->with('message', 'Product Added Successfully');
     }
 
+    public function showProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        // dd($product);
+        // $products = Product::where('id',$id)->latest()->get();
+        return view('admin.showproduct', compact('product'));
+
+    }
+
     public function EditProduct($id)
     {
 
         $product_info = Product::findOrFail($id);
         return view('admin.editproduct', compact('product_info'));
 
-  
 
 
-    
+
+
     }
 
     public function UpdateProduct(Request $request)
@@ -101,7 +110,7 @@ class ProductController extends Controller
         $product_id = $request->id;
 
         $request->validate([
-            'product_name' => 'required|max:255|unique:products,product_name,'.$request->id,
+            'product_name' => 'required|max:255|unique:products,product_name,' . $request->id,
             'product_price' => 'required',
             'product_quantity' => 'required',
             'short_pd' => 'required',
@@ -143,7 +152,7 @@ class ProductController extends Controller
         $id = $request->id;
 
         $image = $request->file('product_img');
-        $img_name = hexdec(uniqid()) .'.'. $image->getClientOriginalExtension();
+        $img_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
         $request->product_img->move(public_path('upload'), $img_name);
         $img_url = 'upload/' . $img_name;
 
@@ -160,14 +169,14 @@ class ProductController extends Controller
 
     public function DeleteProduct($id)
     {
-        
-        $cat_id=Product::where('id',$id)->value('product_category_id');
-        $subcat_id=Product::where('id',$id)->value('product_subcategory_id');
+
+        $cat_id = Product::where('id', $id)->value('product_category_id');
+        $subcat_id = Product::where('id', $id)->value('product_subcategory_id');
         Category::where('id', $cat_id)->decrement('product_count');
         SubCategory::where('id', $subcat_id)->decrement('product_count');
         Product::findOrFail($id)->delete();
 
-        
+
 
         return redirect()->route('allproduct')->with('message', 'Product Deleted Successfully');
 

@@ -30,6 +30,7 @@
                     </thead>
                     <tbody class="table-border-bottom-0">
                         @foreach ($products as $product)
+                        {{-- <input type="hidden" value="{{ $product->id }}" name="product_id"> --}}
                             <tr>
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->product_name }}</td>
@@ -45,6 +46,7 @@
                                 <td>
 
                                     <a href="{{ route('editproduct', $product->id) }} " class="btn btn-primary"> Edit</a>
+                                    <a href="{{ route('showproduct',[$product->id,$product->slug]) }}" class="btn btn-warning">Show</a>
                                     <a href="{{ route('deleteproduct',$product->id) }}" class="btn btn-danger">Delete</a>
 
                                 </td>
