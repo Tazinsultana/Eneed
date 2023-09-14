@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CartModel;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ShippingInfo;
 use App\Models\SubCategory;
@@ -78,18 +79,18 @@ class ClintController extends Controller
     public function GetShippingInfo(Request $request)
     {
 
-       
+
         // $user_id = Auth::id();
         $request->validate([
 
-           
+
             'address' => 'required',
             'postalcode' => 'required',
             'phone' => 'required'
-        
+
 
         ]);
-      
+
 
         ShippingInfo::create([
             'user_id' => Auth::id(),
@@ -97,15 +98,56 @@ class ClintController extends Controller
             'postal_code' => $request->postalcode,
             'phone' => $request->phone,
         ]);
-       
-    
+
+
         return redirect()->route('shippingadded')->with('message', 'Address Added Successfully!!');
 
     }
 
-    public function ShippingAdded(){
+    public function ShippingAdded()
+    {
+        $userid = Auth::id();
 
-        return view('user.addship');
+        $cart_item = CartModel::where('user_id', $userid)->get();
+
+        $shipping_address = ShippingInfo::where('user_id', $userid)->first();
+        //    dd('abc');
+
+
+        return view('user.addship', compact('cart_item', 'shipping_address'));
+    }
+
+
+    public function PlaceOrder()
+    {
+        $userid = Auth::id();
+        $shipping_address = ShippingInfo::where('user_id', $userid)->first();
+        $cart_item = CartModel::where('user_id', $userid)->get();
+
+
+        foreach ($cart_item as $items) {
+            Order::insert([
+                'user_id' => $userid,
+                'shipping_address' => $shipping_address->address,
+                'shipping_postalcode' => $shipping_address->postal_code,
+                'shipping_phone' => $shipping_address->phone,
+                'product_id' => $items->product_id,
+                'quantity' => $items->quantity,
+                'total_price' => $items->price,
+
+
+
+            ]);
+            $id = $items->id;
+
+            CartModel::findOrFail($id)->delete();
+
+
+        }
+        ShippingInfo::where('user_id', $userid)->first()->delete();
+      
+        return redirect()->route('pendingorders')->with('message', 'Your Order Placed successfully');
+
     }
 
     public function UserProfile()
@@ -115,7 +157,9 @@ class ClintController extends Controller
     }
     public function PendingOrder()
     {
-        return view('user.pendingorders');
+        // $userid = Auth::id();
+        $pending_order=Order::where('status','pending')->latest()->get();
+        return view('user.pendingorders',compact('pending_order'));
 
 
     }
